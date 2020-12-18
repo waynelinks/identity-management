@@ -1,6 +1,6 @@
 import winston from 'winston'
 
-import { ILogger } from '../interfaces/ILogger'
+import { ILogger } from '../interfaces'
 
 const customLevels = {
   levels: {
