@@ -33,7 +33,9 @@
     "jest/expect-expect": "off",
     "max-len": "off",
     "eol-last": "off",
-    "semi": "off"
+    "semi": "off",
+    "no-shadow": "off"
+    
   }
 }
 // eslint-disable-next-line max-len
