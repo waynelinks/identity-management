@@ -55,27 +55,27 @@ class Logger {
     winston.addColors(customLevels.colors)
   }
 
-  trace(msg: string, meta?: ILogger) {
+  trace(msg: string, meta?: ILogger | Error) {
     this.logger.log('trace', msg, meta)
   }
 
-  debug(msg: string, meta?: ILogger) {
+  debug(msg: string, meta?: ILogger | Error) {
     this.logger.debug(msg, meta)
   }
 
-  info(msg: string, meta?: ILogger) {
+  info(msg: string, meta?: ILogger | Error) {
     this.logger.info(msg, meta)
   }
 
-  warn(msg: string, meta?: ILogger) {
+  warn(msg: string, meta?: ILogger | Error) {
     this.logger.warn(msg, meta)
   }
 
-  error(msg: string, meta?: ILogger) {
+  error(msg: string, meta?: ILogger | Error) {
     this.logger.error(msg, meta)
   }
 
-  fatal(msg: string, meta?: ILogger) {
+  fatal(msg: string, meta?: ILogger | Error) {
     this.logger.log('fatal', msg, meta)
   }
 }

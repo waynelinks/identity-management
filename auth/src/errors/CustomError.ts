@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '../utils'
-import { CommonErrors } from '../utils/CommonErrors'
+import { CommonErrors } from '../enums/CommonErrors'
 
 export class CustomError extends Error {
   public readonly errorType: CommonErrors;
@@ -8,15 +8,24 @@ export class CustomError extends Error {
 
   public readonly isOperational: boolean;
 
-  constructor(errorType: CommonErrors, httpCode: HttpStatusCode, isOperational = false, description: string) {
+  constructor(httpCode: HttpStatusCode, public description: string) {
     super(description)
 
     Object.setPrototypeOf(this, new.target.prototype);
 
-    this.errorType = errorType;
+    this.errorType = checkCommonErrors(httpCode);
     this.httpCode = httpCode;
-    this.isOperational = isOperational;
+    this.isOperational = true;
 
     Error.captureStackTrace(this);
+  }
+
+  serializeErrors(): Record<string, unknown>[] {
+    return [{
+      success: false,
+      error_code: this.httpCode,
+      type: this.errorType,
+      message: this.description,
+    }]
   }
 }
