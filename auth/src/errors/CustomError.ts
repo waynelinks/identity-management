@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '../utils'
-import { CommonErrors } from '../enums/CommonErrors'
+import { checkCommonErrors } from '../utils'
+import { HttpStatusCode } from '../enums'
 
 export class CustomError extends Error {
-  public readonly errorType: CommonErrors;
+  public readonly errorType: string | null;
 
   public readonly httpCode: HttpStatusCode;
 
