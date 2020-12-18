@@ -1,18 +1,18 @@
 import { HttpStatusCode } from '../utils'
 
 export class CustomError extends Error {
-  public readonly name: string;
+  public readonly errorType: string;
 
   public readonly httpCode: HttpStatusCode;
 
   public readonly isOperational: boolean;
 
-  constructor(name: string, httpCode: HttpStatusCode, isOperational: boolean, description: string) {
+  constructor(errorType: string, httpCode: HttpStatusCode, isOperational = false, description: string) {
     super(description)
 
     Object.setPrototypeOf(this, new.target.prototype);
 
-    this.name = name;
+    this.errorType = errorType;
     this.httpCode = httpCode;
     this.isOperational = isOperational;
 
