@@ -1,22 +1,22 @@
+/* eslint-disable consistent-return */
+/* eslint-disable class-methods-use-this */
 import { logger } from '../utils'
-import { CustomError } from './CustomError'
+import { AppError } from './AppError'
 
 class ErrorHandler {
-  static async handleError(err: Error): Promise<void> {
-    await logger.error(
-      'Error message from the centralized error-handling component',
+  public async handleError(err: Error): Promise<void> {
+    logger.error(
+      'Something went wrong. Error message from the centralized error-handling component',
       err,
-    )
+    );
     // await sendMailToAdminIfCritical();
-    // await saveInOpsQueueIfCritical();
+    // await sendEventsToSentry();
   }
 
-  static determineIfOperationalError(error: Error): boolean {
-    if (error instanceof CustomError) {
-      return error.isOperational;
+  public determineIfOperationalError(error: Error) {
+    if (error instanceof AppError) {
+      return error;
     }
-    return false;
   }
 }
-
-export const errorHandler = ErrorHandler
+export const errorHandler = new ErrorHandler();
