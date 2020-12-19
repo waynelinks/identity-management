@@ -6,15 +6,15 @@ class ErrorHandler {
     await logger.error(
       'Error message from the centralized error-handling component',
       err,
-    );
+    )
     // await sendMailToAdminIfCritical();
     // await saveInOpsQueueIfCritical();
   }
 
-  static determineIfOperationalError(error: Error): boolean {
-    if (error instanceof CustomError) return error.isOperational
-
-    return false
+  static determineIfOperationalError(error: Error) {
+    if (error instanceof CustomError) {
+      return res.status(error.httpCode).send({ errors: error.serializeErrors() })
+    }
   }
 }
 
