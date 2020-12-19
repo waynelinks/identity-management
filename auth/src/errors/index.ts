@@ -1,2 +1,7 @@
 export * from './CustomError'
+export * from './BadRequestError'
+export * from './DbConnectionError'
+export * from './NotFoundError'
+export * from './ServerError'
+export * from './UnAuthorizedError'
 export * from './ErrorHandler'
