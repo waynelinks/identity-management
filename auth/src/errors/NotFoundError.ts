@@ -2,12 +2,12 @@
 import { CommonErrors, HttpStatusCode } from '../enums'
 import { CustomError } from './CustomError'
 
-export class DbConnectionError extends CustomError {
+export class NotFoundError extends CustomError {
   isOperational = true
 
-  errorType = CommonErrors.DATABASE_ERROR
+  errorType = CommonErrors.NOT_FOUND
 
-  httpCode = HttpStatusCode.INTERNAL_SERVER_ERROR
+  httpCode = HttpStatusCode.NOT_FOUND
 
   success = false
 
