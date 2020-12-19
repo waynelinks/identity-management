@@ -11,10 +11,11 @@ class ErrorHandler {
     // await saveInOpsQueueIfCritical();
   }
 
-  static determineIfOperationalError(error: Error) {
+  static determineIfOperationalError(error: Error): boolean {
     if (error instanceof CustomError) {
-      return res.status(error.httpCode).send({ errors: error.serializeErrors() })
+      return error.isOperational;
     }
+    return false;
   }
 }
 
