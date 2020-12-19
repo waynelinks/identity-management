@@ -3,7 +3,9 @@ export abstract class CustomError extends Error {
 
   abstract httpCode: number
 
-  isOperational = true
+  abstract success: boolean
+
+  abstract isOperational: boolean
 
   constructor(message: string) {
     super(message)
@@ -15,7 +17,7 @@ export abstract class CustomError extends Error {
 
   abstract serializeErrors(): {
     success: boolean
-    errorCode: string
+    errorCode: number
     type: string
     message: string
   }
