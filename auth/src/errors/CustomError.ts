@@ -1,14 +1,13 @@
 import { checkCommonErrors } from '../utils'
-import { HttpStatusCode } from '../enums'
 
 export class CustomError extends Error {
   public readonly errorType: string | null;
 
-  public readonly httpCode: HttpStatusCode;
+  public readonly httpCode: number;
 
   public readonly isOperational: boolean;
 
-  constructor(httpCode: HttpStatusCode, public description: string) {
+  constructor(httpCode: number, public description: string) {
     super(description)
 
     Object.setPrototypeOf(this, new.target.prototype);
