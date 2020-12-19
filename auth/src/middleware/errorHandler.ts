@@ -1,15 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { CustomError } from '../errors'
-import { logger } from '../utils'
+import { errorHandler } from '../errors'
 
-export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof CustomError) {
-    return res.status(err.httpCode).send({ errors: err.serializeErrors() });
-  }
+export const errorDeligator = async (err: Error, req: Request, res: Response, next: NextFunction): Promise<void> => {
+  if (!errorHandler.determineIfOperationalError(err)) next(err)
 
-  logger.error(err);
-  res.status(400).send({
-    errors: [{ message: 'Something went wrong' }],
-  });
+  await errorHandler.handleError(err)
 };
