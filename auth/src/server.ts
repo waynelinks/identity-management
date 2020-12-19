@@ -8,7 +8,8 @@ import { logger } from './utils'
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
-if (!process.env.PRIVATE_KEY) throw new CustomError(500, 'PRIVATE_KEY is not set!')
+if (!process.env.TOKEN_SECRET) throw new CustomError(500, 'TOKEN_SECRET is not set!')
+
 const port = process.env.PORT || 3001
 const server = createServer(app)
 

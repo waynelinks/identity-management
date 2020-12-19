@@ -1,30 +1,22 @@
-import { checkCommonErrors } from '../utils'
+export abstract class CustomError extends Error {
+  abstract errorType: string
 
-export class CustomError extends Error {
-  public readonly errorType: string | null;
+  abstract httpCode: number
 
-  public readonly httpCode: number;
+  isOperational = true
 
-  public readonly isOperational: boolean;
+  constructor(message: string) {
+    super(message)
 
-  constructor(httpCode: number, public description: string) {
-    super(description)
+    Object.setPrototypeOf(this, new.target.prototype)
 
-    Object.setPrototypeOf(this, new.target.prototype);
-
-    this.errorType = checkCommonErrors(httpCode);
-    this.httpCode = httpCode;
-    this.isOperational = true;
-
-    Error.captureStackTrace(this);
+    Error.captureStackTrace(this)
   }
 
-  serializeErrors(): Record<string, unknown>[] {
-    return [{
-      success: false,
-      error_code: this.httpCode,
-      type: this.errorType,
-      message: this.description,
-    }]
+  abstract serializeErrors(): {
+    success: boolean
+    errorCode: string
+    type: string
+    message: string
   }
 }

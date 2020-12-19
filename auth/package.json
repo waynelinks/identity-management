@@ -10,6 +10,8 @@
     "tsc": "tsc",
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",
+    "start": "yarn build && NODE_ENV=production node dist/src/server.js",
+    "dev": "NODE_ENV=development nodemon dist/src/server.js",
     "make:migration": "knex migrate:make",
     "migrate:prod": "NODE_ENV=production knex migrate:latest",
     "migrate": "NODE_ENV=development knex migrate:latest",
