@@ -12,7 +12,7 @@ const user: IUser = {
 
 describe('User Service', () => {
   describe('Register new user', () => {
-    it('POST /users - return 201 when successfull registration', async () => {
+    it('POST /register - return 201 when successfull registration', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send(user)
@@ -23,7 +23,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return 400 when invalid email', async () => {
+    it('POST /register - return 400 when invalid email', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send({
@@ -39,7 +39,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return 400 when invalid password', async () => {
+    it('POST /register - return 400 when invalid password', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send({
@@ -55,7 +55,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return 400 when missing email', async () => {
+    it('POST /register - return 400 when missing email', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send({
@@ -70,7 +70,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return 400 when missing password', async () => {
+    it('POST /register - return 400 when missing password', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send({
@@ -85,7 +85,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return 400 when duplicate email', async () => {
+    it('POST /register - return 400 when duplicate email', async () => {
       await request(app).post(`${process.env.BASE_API_V1}/register`).send(user).expect(201)
 
       const res = await request(app)
@@ -97,7 +97,7 @@ describe('User Service', () => {
       expect(res.text).not.toContain('Something went wrong')
     })
 
-    it('POST /users - return when Set-Cookie is set', async () => {
+    it('POST /register - return when Set-Cookie is set', async () => {
       const res = await request(app)
         .post(`${process.env.BASE_API_V1}/register`)
         .send(user)
