@@ -10,10 +10,6 @@ export class User {
     return rows
   }
 
-  private static isObjectEmpty(obj: IUser): boolean {
-    return Object.keys(obj).length === 0
-  }
-
   static async create(payload: IUser): Promise<string | null> {
     const { email, password, firstName, lastName } = payload
 
