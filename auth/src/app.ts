@@ -1,9 +1,11 @@
 import 'express-async-errors'
 import express from 'express'
 
-import { errorDeligator } from './middleware'
+import { commonMiddleware, errorDeligator } from './middleware'
 
 const app = express()
+
+commonMiddleware(app, express)
 
 app.use(errorDeligator)
 
