@@ -22,7 +22,7 @@ export const commonMiddleware = (app: Express, express: any): void => {
   app.use(
     cookieSession({
       signed: false,
-      secure: process.env.NODE_ENV !== 'tests',
+      secure: process.env.NODE_ENV !== 'test',
     }),
   )
 }

@@ -14,6 +14,8 @@ const user: IUser = {
 describe('JWT Service', () => {
   describe('Create new token', () => {
     it('When user [register, login], then new jwt token is created', async () => {
+      delete user.password
+
       const token = createToken(user)
       const decoded = verify(
         token,

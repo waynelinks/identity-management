@@ -7,7 +7,7 @@ import { routes } from './routes/v1'
 const app = express()
 
 commonMiddleware(app, express)
-app.use(requestTraceId)
+// app.use(requestTraceId)
 
 app.use(`${process.env.BASE_API_V1}`, routes)
 
