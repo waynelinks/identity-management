@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from '../db'
 import { IUser } from '../interfaces'
 import { createToken, doPassword } from '../security'
@@ -41,7 +42,7 @@ export class User {
       userExist[0].password,
     )
     if (!isValidPassword) return null
-    
+
     return createToken(userExist[0])
   }
 }

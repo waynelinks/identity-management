@@ -11,7 +11,7 @@ export const signinUser = async (req: Request, res: Response): Promise<void> => 
   if (!token) throw new AppError(CommonErrors.BAD_REQUEST, HttpStatusCode.BAD_REQUEST, 'Invalid Credentials!', true)
 
   req.session = {
-    jwt: token,
+    token,
   }
 
   res.status(200).json({

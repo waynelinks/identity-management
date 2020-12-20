@@ -5,8 +5,8 @@ import { verify, Secret } from 'jsonwebtoken'
 
 interface IUserPayload {
   id: string
-  firstname: string
-  lastname: string
+  firstName: string
+  lastName: string
   email: string
 }
 
@@ -23,14 +23,10 @@ export const currentUser = (
   res: Response,
   next: NextFunction,
 ): void => {
-  if (!req.session?.jwt) return next()
+  if (!req.session?.token) return next()
 
   try {
-    const payload = verify(
-      req.session.jwt,
-      process.env.TOKEN_KEY as Secret,
-    ) as IUserPayload
-
+    const payload = verify(req.session?.token, process.env.TOKEN_SECRET as Secret) as IUserPayload
     req.currentUser = payload
   } catch (err) {}
 

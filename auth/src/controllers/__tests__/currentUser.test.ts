@@ -17,7 +17,6 @@ describe('User Service', () => {
         .post(`${process.env.BASE_API_V1}/register`)
         .send(register)
         .expect(201)
-
       const cookie = signup.get('Set-Cookie')
 
       const res = await request(app)
@@ -25,6 +24,7 @@ describe('User Service', () => {
         .set('Cookie', cookie)
         .send()
         .expect(200)
+
       expect(res.body.currentUser.email).toEqual(register.email)
       expect(res.text).not.toContain('Something went wrong')
     })
