@@ -18,8 +18,8 @@ describe('User Service', () => {
         .send(user)
         .expect(201)
 
-      expect(res.body.type).toEqual('register')
-      expect(res.body.meta.status).toEqual('pending')
+      expect(res.body.success).toBeTruthy()
+      expect(res.body.message).toEqual('Register Complete')
       expect(res.text).not.toContain('Something went wrong')
     })
 
