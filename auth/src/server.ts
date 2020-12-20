@@ -1,4 +1,3 @@
-import dotenv from 'dotenv'
 import { createServer } from 'http'
 
 import './db'
@@ -7,16 +6,14 @@ import { AppError } from './errors'
 import { logger } from './utils'
 import { CommonErrors, HttpStatusCode } from './enums'
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-
-// if (!process.env.TOKEN_SECRET) {
-//   throw new AppError(
-//     CommonErrors.SERVER_ERROR,
-//     HttpStatusCode.SERVER_ERROR,
-//     ' TOKEN_SECRET is not set!',
-//     true,
-//   )
-// }
+if (!process.env.TOKEN_KEY) {
+  throw new AppError(
+    CommonErrors.SERVER_ERROR,
+    HttpStatusCode.SERVER_ERROR,
+    ' TOKEN_SECRET is not set!',
+    true,
+  )
+}
 
 const port = process.env.PORT || 3001
 const server = createServer(app)

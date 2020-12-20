@@ -1,7 +1,7 @@
 {
   "name": "auth",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "license": "MIT",
   "engines": {
     "node": ">= 14.15.0"
@@ -10,8 +10,8 @@
     "tsc": "tsc",
     "clean": "rimraf dist",
     "build": "yarn clean && tsc",
-    "start": "yarn build && NODE_ENV=production node dist/src/server.js",
-    "dev": "NODE_ENV=development nodemon dist/src/server.js",
+    "start": "yarn build && NODE_ENV=production node dist/src/index.js",
+    "dev": "NODE_ENV=development nodemon dist/src/index.js",
     "make:migration": "knex migrate:make",
     "migrate:prod": "NODE_ENV=production knex migrate:latest",
     "migrate": "NODE_ENV=development knex migrate:latest",
