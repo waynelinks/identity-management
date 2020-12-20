@@ -1,8 +1,7 @@
 import 'express-async-errors'
 import express from 'express'
 
-import { commonMiddleware, errorDeligator, requestTraceId } from './middleware'
-import { notFound } from './middleware/notFound'
+import { commonMiddleware, errorDeligator, notFound, requestTraceId } from './middleware'
 import { routes } from './routes/v1'
 
 const app = express()
