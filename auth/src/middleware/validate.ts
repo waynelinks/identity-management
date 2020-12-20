@@ -14,6 +14,13 @@ function validateRegistration(req: Request) {
   }).validate(req)
 }
 
+function validateSignin(req: Request) {
+  return Joi.object({
+    email: Joi.string().required().email().trim(),
+    password: Joi.string().required().min(5),
+  }).validate(req)
+}
+
 export const validate = (validator: string) => (
   req: Request,
   _res: Response,
@@ -22,6 +29,13 @@ export const validate = (validator: string) => (
   switch (validator) {
     case 'register': {
       const { error } = validateRegistration(req.body)
+      if (error) throw new AppError(CommonErrors.BAD_REQUEST, HttpStatusCode.BAD_REQUEST, error.details[0].message, true)
+
+      break
+    }
+
+    case 'signin': {
+      const { error } = validateSignin(req.body)
       if (error) throw new AppError(CommonErrors.BAD_REQUEST, HttpStatusCode.BAD_REQUEST, error.details[0].message, true)
 
       break

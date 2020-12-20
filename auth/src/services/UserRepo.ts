@@ -21,13 +21,27 @@ export class User {
     const serializedPayload = {
       first_name: firstName,
       last_name: lastName,
-      password,
+      password: payload.password,
       email,
     }
 
     const result = await db('users').insert(serializedPayload, '*')
     delete result[0].password
-
     return createToken(result[0])
+  }
+
+  static async signin(payload: IUser): Promise<string | null> {
+    const { email, password } = payload
+
+    const userExist = await this.findByEmail(email)
+    if (!userExist.length) return null
+
+    const isValidPassword = await doPassword.check(
+      password as string,
+      userExist[0].password,
+    )
+    if (!isValidPassword) return null
+    
+    return createToken(userExist[0])
   }
 }
